@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.mycompany.frame;
+package ni.edu.uni.programacion.views;
 
+import ni.edu.uni.programacion.views.panels.Dialogpane;
+import ni.edu.uni.programacion.controllers.PnlVehicleController;
 /**
  *
  * @author Sistemas-11
  */
-public class frmVehicle extends javax.swing.JFrame {
-
+public class frmVehicle extends javax.swing.JFrame 
+{
+    private PnlVehicleController pnlVehicleController;
+    private Dialogpane dialogpane;
+    private boolean rootPaneCheckinqEnabled;
+  
     /**
      * Creates new form frmVehicle
      */
@@ -39,7 +40,7 @@ public class frmVehicle extends javax.swing.JFrame {
         jMenu1.setText("File");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sistemas-11\\Documents\\NetBeansProjects\\Sistematico2\\src\\main\\resources\\images\\new (2).png")); // NOI18N
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/new (2).png"))); // NOI18N
         jMenuItem1.setText("New");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,12 +50,12 @@ public class frmVehicle extends javax.swing.JFrame {
         jMenu1.add(jMenuItem1);
 
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sistemas-11\\Documents\\NetBeansProjects\\Sistematico2\\src\\main\\resources\\images\\Webp.net-resizeimage.png")); // NOI18N
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Webp.net-resizeimage.png"))); // NOI18N
         jMenuItem2.setText("View");
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Sistemas-11\\Documents\\NetBeansProjects\\Sistematico2\\src\\main\\resources\\images\\Webp.net-resizeimage (1).png")); // NOI18N
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Webp.net-resizeimage (1).png"))); // NOI18N
         jMenuItem3.setText("Close");
         jMenu1.add(jMenuItem3);
         jMenu1.add(jSeparator1);
@@ -67,18 +68,23 @@ public class frmVehicle extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 475, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGap(0, 313, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(491, 374));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
+        if(dialogpane==null)
+        {
+            dialogpane = new Dialogpane(this,rootPaneCheckinqEnabled);           
+        }
+        dialogpane.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**

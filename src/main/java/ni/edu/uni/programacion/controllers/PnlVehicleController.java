@@ -27,13 +27,14 @@ import ni.edu.uni.programacion.backend.dao.implementation.JsonVehicleDaoImpl;
 import ni.edu.uni.programacion.backend.pojo.Vehicle;
 import ni.edu.uni.programacion.backend.pojo.VehicleSubModel;
 import ni.edu.uni.programacion.views.panels.PnlVehicle;
+import ni.edu.uni.programacion.views.panels.Dialogpane;
 
 /**
  *
  * @author Sistemas-05
  */
 public class PnlVehicleController {
-    private PnlVehicle pnlVehicle;
+    private Dialogpane dialogpane;
     private JsonVehicleDaoImpl jvdao;
     private List<VehicleSubModel> vSubModels;
     private Gson gson;
@@ -45,8 +46,8 @@ public class PnlVehicleController {
     private String status[] = new String[]{"Active","Mantainance","Not available"};
     private JFileChooser fileChooser;
     
-    public PnlVehicleController(PnlVehicle pnlVehicle) throws FileNotFoundException {
-        this.pnlVehicle = pnlVehicle;
+    public PnlVehicleController(Dialogpane dialogpane) throws FileNotFoundException {
+        this.dialogpane = dialogpane;
         initComponent();        
     }
     
@@ -72,17 +73,17 @@ public class PnlVehicleController {
         cmbModelIColor= new DefaultComboBoxModel(colors.toArray());
         cmbModelStatus = new DefaultComboBoxModel(status);
         
-        pnlVehicle.getCmbMake().setModel(cmbModelMake);
-        pnlVehicle.getCmbModel().setModel(cmbModelModel);
-        pnlVehicle.getCmbEColor().setModel(cmbModelEColor);
-        pnlVehicle.getCmbIColor().setModel(cmbModelIColor);
-        pnlVehicle.getCmbStatus().setModel(cmbModelStatus);
+        dialogpane.getCmbMake().setModel(cmbModelMake);
+        dialogpane.getCmbModel().setModel(cmbModelModel);
+        dialogpane.getCmbEColor().setModel(cmbModelEColor);
+        dialogpane.getCmbIColor().setModel(cmbModelIColor);
+        dialogpane.getCmbStatus().setModel(cmbModelStatus);
         
-        pnlVehicle.getBtnSave().addActionListener((actionEvent) -> {
+        dialogpane.getBtnSave().addActionListener((actionEvent) -> {
             btnSaveActionListener(actionEvent);
         });
         
-        pnlVehicle.getBtnBrowse().addActionListener(((e) -> {
+        dialogpane.getBtnBrowse().addActionListener(((e) -> {
             btnBrowseActionListener(e);
         }));
         
@@ -94,21 +95,21 @@ public class PnlVehicleController {
         float price;
         Vehicle.Transmission transmission;
                 
-        stock = Integer.parseInt(pnlVehicle.getTxtStock().getText());
-        year = Integer.parseInt(pnlVehicle.getSpnYear().getModel().getValue().toString());
-        make = pnlVehicle.getCmbMake().getSelectedItem().toString();
-        model = pnlVehicle.getCmbModel().getSelectedItem().toString();
-        style = pnlVehicle.getTxtStyle().getText();
-        vin = pnlVehicle.getFmtVin().getText();
-        eColor = pnlVehicle.getCmbEColor().getSelectedItem().toString();
-        iColor = pnlVehicle.getCmbIColor().getSelectedItem().toString();
-        miles = pnlVehicle.getSpnMiles().getModel().getValue().toString();
-        price = Float.parseFloat(pnlVehicle.getSpnPrice().getModel().getValue().toString());
-        transmission = pnlVehicle.getRbtnAut().isSelected() ? 
+        stock = Integer.parseInt(dialogpane.getTxtStock().getText());
+        year = Integer.parseInt(dialogpane.getSpnYear().getModel().getValue().toString());
+        make = dialogpane.getCmbMake().getSelectedItem().toString();
+        model = dialogpane.getCmbModel().getSelectedItem().toString();
+        style = dialogpane.getTxtStyle().getText();
+        vin = dialogpane.getFmtVin().getText();
+        eColor = dialogpane.getCmbEColor().getSelectedItem().toString();
+        iColor = dialogpane.getCmbIColor().getSelectedItem().toString();
+        miles = dialogpane.getSpnMiles().getModel().getValue().toString();
+        price = Float.parseFloat(dialogpane.getSpnPrice().getModel().getValue().toString());
+        transmission = dialogpane.getRbtnAut().isSelected() ? 
                 Vehicle.Transmission.AUTOMATIC : Vehicle.Transmission.MANUAL;
-        engine = pnlVehicle.getTxtEngine().getText();
-        image = pnlVehicle.getTxtImage().getText();
-        status = pnlVehicle.getCmbStatus().getSelectedItem().toString();
+        engine = dialogpane.getTxtEngine().getText();
+        image = dialogpane.getTxtImage().getText();
+        status = dialogpane.getCmbStatus().getSelectedItem().toString();
         
         
         Vehicle v = new Vehicle(stock, year, make, model, style, vin, 
@@ -138,7 +139,7 @@ public class PnlVehicleController {
         }
         
         File imageFile = fileChooser.getSelectedFile();
-        pnlVehicle.getTxtImage().setText(imageFile.getPath());        
+        dialogpane.getTxtImage().setText(imageFile.getPath());        
     }
     
     private void vehicleValidation(Vehicle v) throws Exception{

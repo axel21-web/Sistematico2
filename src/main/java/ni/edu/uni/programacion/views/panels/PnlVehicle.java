@@ -154,6 +154,11 @@ public class PnlVehicle extends javax.swing.JPanel {
         btnSave.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
         btnSave.setForeground(new java.awt.Color(0, 153, 102));
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnSave);
 
         btnCancel.setFont(new java.awt.Font("Verdana", 1, 12)); // NOI18N
@@ -453,6 +458,10 @@ public class PnlVehicle extends javax.swing.JPanel {
         }
         txtStock.setBorder(null);
     }//GEN-LAST:event_txtStockFocusLost
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

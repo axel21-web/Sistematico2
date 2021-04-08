@@ -1,5 +1,8 @@
 package ni.edu.uni.programacion.views;
 
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import ni.edu.uni.programacion.views.panels.Dialogpane;
 import ni.edu.uni.programacion.controllers.PnlVehicleController;
 /**
@@ -37,7 +40,7 @@ public class frmVehicle extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu1.setText("File");
+        jMenu1.setText("Opciones");
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/new (2).png"))); // NOI18N
@@ -82,7 +85,12 @@ public class frmVehicle extends javax.swing.JFrame
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if(dialogpane==null)
         {
-            dialogpane = new Dialogpane(this,rootPaneCheckinqEnabled);           
+            dialogpane = new Dialogpane(this,rootPaneCheckinqEnabled);     
+            try {
+                pnlVehicleController = new PnlVehicleController(dialogpane);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(frmVehicle.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         dialogpane.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed

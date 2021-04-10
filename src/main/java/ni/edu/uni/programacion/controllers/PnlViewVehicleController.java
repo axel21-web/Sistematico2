@@ -20,13 +20,15 @@ import javax.swing.table.TableRowSorter;
 import ni.edu.uni.programacion.backend.dao.implementation.JsonVehicleDaoImpl;
 import ni.edu.uni.programacion.backend.pojo.Vehicle;
 import ni.edu.uni.programacion.views.panels.PnlViewVehicles;
+import ni.edu.uni.programacion.views.panels.internalframe;
 
 /**
  *
  * @author Sistemas-05
  */
 public class PnlViewVehicleController {
-
+    
+    private internalframe internalframe;
     private PnlViewVehicles pnlViewVehicles;
     private JsonVehicleDaoImpl jsonVehicleDaoImpl;
     private DefaultTableModel tblViewModel;
@@ -35,8 +37,8 @@ public class PnlViewVehicleController {
         "Vin", "Exterior color", "Interior color", "Miles", "Price", "Transmission", "Engine", "Image", "Status"};
     private TableRowSorter<DefaultTableModel> tblRowSorter;
 
-    public PnlViewVehicleController(PnlViewVehicles pnlViewVehicles) {
-        this.pnlViewVehicles = pnlViewVehicles;
+    public PnlViewVehicleController(internalframe internalframe) {
+        this.internalframe = internalframe;
         initComponent();
     }
 
@@ -46,7 +48,7 @@ public class PnlViewVehicleController {
 
             loadTable();
 
-            pnlViewVehicles.getTxtFinder().addKeyListener(new KeyAdapter() {
+            internalframe.getTxtFinder().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyTyped(KeyEvent e) {
                     txtFinderKeyTyped(e);
@@ -62,7 +64,7 @@ public class PnlViewVehicleController {
 
     private void txtFinderKeyTyped(KeyEvent e) {
         RowFilter<DefaultTableModel, Object> rf = null;
-        rf = RowFilter.regexFilter(pnlViewVehicles.getTxtFinder().getText(), 0, 1, 2, 3, 4, 5, 6, 7, 8);
+        rf = RowFilter.regexFilter(internalframe.getTxtFinder().getText(), 0, 1, 2, 3, 4, 5, 6, 7, 8);
         tblRowSorter.setRowFilter(rf);
     }
 
@@ -70,8 +72,8 @@ public class PnlViewVehicleController {
         tblViewModel = new DefaultTableModel(getData(), HEADERS);
         tblRowSorter = new TableRowSorter<>(tblViewModel);
 
-        pnlViewVehicles.getTblViewVehicle().setModel(tblViewModel);
-        pnlViewVehicles.getTblViewVehicle().setRowSorter(tblRowSorter);
+        internalframe.getTblViewVehicle().setModel(tblViewModel);
+        internalframe.getTblViewVehicle().setRowSorter(tblRowSorter);
     }
 
     private Object[][] getData() throws IOException {

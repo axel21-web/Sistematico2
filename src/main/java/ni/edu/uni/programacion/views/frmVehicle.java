@@ -3,15 +3,21 @@ package ni.edu.uni.programacion.views;
 import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDesktopPane;
 import ni.edu.uni.programacion.views.panels.Dialogpane;
 import ni.edu.uni.programacion.controllers.PnlVehicleController;
+import ni.edu.uni.programacion.views.panels.internalframe;
+import ni.edu.uni.programacion.controllers.PnlViewVehicleController;
 /**
  *
  * @author Sistemas-11
  */
 public class frmVehicle extends javax.swing.JFrame 
 {
+    private internalframe internalframe;
+    private PnlViewVehicleController PnlViewVehicleController;
     private PnlVehicleController pnlVehicleController;
+    private JDesktopPane desktopPane;
     private Dialogpane dialogpane;
     private boolean rootPaneCheckinqEnabled;
   
@@ -55,6 +61,11 @@ public class frmVehicle extends javax.swing.JFrame
         jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Webp.net-resizeimage.png"))); // NOI18N
         jMenuItem2.setText("View");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem2);
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -94,6 +105,24 @@ public class frmVehicle extends javax.swing.JFrame
         }
         dialogpane.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        if(internalframe==null)
+        {
+            internalframe = new internalframe();
+            PnlViewVehicleController = new PnlViewVehicleController(internalframe);
+        }
+        internalframe.pack();
+        internalframe.setIconifiable(true);
+        internalframe.setMaximizable(true);
+        internalframe.setClosable(true);
+        internalframe.setResizable(true);
+        internalframe.setVisible(true);
+        desktopPane = new JDesktopPane();
+        setContentPane(desktopPane);
+        desktopPane.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments

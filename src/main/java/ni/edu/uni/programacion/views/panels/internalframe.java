@@ -5,15 +5,29 @@
  */
 package ni.edu.uni.programacion.views.panels;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import ni.edu.uni.programacion.backend.dao.implementation.JsonVehicleDaoImpl;
+import ni.edu.uni.programacion.backend.pojo.Vehicle;
+import ni.edu.uni.programacion.controllers.PnlViewVehicleController;
 
 /**
  *
- * @author jose1
+ * @author Axel
  */
 public class internalframe extends javax.swing.JInternalFrame {
-
+ 
+    private Dialogpane dialogpane;
+    private PnlViewVehicles pnlViewVehicles;
+    private PnlViewVehicleController pnlViewVehicleController;
+    
+    
+    
     public JTable getTblViewVehicle() {
         return tblViewVehicle;
     }
@@ -53,6 +67,10 @@ public class internalframe extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblViewVehicle = new javax.swing.JTable();
+        pnlBotones = new javax.swing.JPanel();
+        pnlNew = new javax.swing.JButton();
+        pnlUpdate = new javax.swing.JButton();
+        pnlDelete = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new java.awt.GridBagLayout());
@@ -95,8 +113,92 @@ public class internalframe extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
+        pnlBotones.setLayout(new java.awt.GridBagLayout());
+
+        pnlNew.setText("New");
+        pnlNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pnlNewActionPerformed(evt);
+            }
+        });
+        pnlBotones.add(pnlNew, new java.awt.GridBagConstraints());
+
+        pnlUpdate.setText("Update");
+        pnlUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pnlUpdateActionPerformed(evt);
+            }
+        });
+        pnlBotones.add(pnlUpdate, new java.awt.GridBagConstraints());
+
+        pnlDelete.setText("Delete");
+        pnlDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pnlDeleteActionPerformed(evt);
+            }
+        });
+        pnlBotones.add(pnlDelete, new java.awt.GridBagConstraints());
+
+        getContentPane().add(pnlBotones, java.awt.BorderLayout.PAGE_END);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void pnlNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlNewActionPerformed
+        // TODO add your handling code here:
+        dialogpane = new Dialogpane(null, true);
+        dialogpane.setVisible(true);
+    }//GEN-LAST:event_pnlNewActionPerformed
+
+    private void pnlUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlUpdateActionPerformed
+        // TODO add your handling code here:
+        
+        if(pnlViewVehicles.getTblViewVehicle().getSelectedRow() == -1)
+        { 
+            JOptionPane.showMessageDialog(null, "Seleccione una fila si desea editar sus campos.",
+                    "Updating message",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        Dialogpane dialogpane = new Dialogpane(null, true);
+        dialogpane.setPnlViewVehicleReference(pnlViewVehicles, pnlViewVehicleController);
+        dialogpane.setVisible(true);
+        
+        
+    }//GEN-LAST:event_pnlUpdateActionPerformed
+
+    private void pnlDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnlDeleteActionPerformed
+      if(pnlViewVehicles.getTblViewVehicle().getSelectedRow() == -1)
+        {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila si desea eliminarla.",
+                    "Delete message",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        
+        int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this row?","Delete", JOptionPane.YES_NO_OPTION);
+        
+        if(option == JOptionPane.NO_OPTION)
+            return;
+        
+        int row = pnlViewVehicles.getTblViewVehicle().getSelectedRow();
+        int vehicleId = pnlViewVehicleController.getVehicles().get(row).getId();
+
+        Vehicle vehicle = new Vehicle();
+        vehicle.setId(vehicleId);
+        JsonVehicleDaoImpl jsonVehicleDaoImpl;
+        try
+        {
+            jsonVehicleDaoImpl = new JsonVehicleDaoImpl();
+            jsonVehicleDaoImpl.delete(vehicle);
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(internalframe.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(internalframe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JOptionPane.showMessageDialog(null, "The row was sucessfully deleted",
+                "Delete message",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_pnlDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -104,6 +206,10 @@ public class internalframe extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel pnlBotones;
+    private javax.swing.JButton pnlDelete;
+    private javax.swing.JButton pnlNew;
+    private javax.swing.JButton pnlUpdate;
     private javax.swing.JTable tblViewVehicle;
     private javax.swing.JTextField txtFinder;
     // End of variables declaration//GEN-END:variables

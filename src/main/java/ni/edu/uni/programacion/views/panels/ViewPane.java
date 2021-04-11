@@ -5,12 +5,22 @@
  */
 package ni.edu.uni.programacion.views.panels;
 
+import ni.edu.uni.programacion.controllers.PnlVehicleController;
+import ni.edu.uni.programacion.controllers.PnlViewVehicleController;
+
 /**
  *
  * @author Sistemas-13
  */
 public class ViewPane extends javax.swing.JDialog {
 
+    private PnlVehicle pnlVehicle;
+    private PnlVehicleController pnlVehicleController;
+    
+    PnlViewVehicles pnlViewVehicles = null;
+    PnlViewVehicleController pnlViewVehicleController = null;
+    
+    
     /**
      * Creates new form ViewPane
      */
@@ -44,6 +54,17 @@ public class ViewPane extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void setPnlViewVehicleReference(PnlViewVehicles pnlViewVehicles, PnlViewVehicleController pnlViewVehicleController)
+    {
+        this.pnlViewVehicles = pnlViewVehicles;
+        this.pnlViewVehicleController = pnlViewVehicleController;
+        
+        if(pnlViewVehicles == null)
+            return;
+    }
+    
+    
     /**
      * @param args the command line arguments
      */

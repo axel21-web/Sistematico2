@@ -25,6 +25,20 @@ public class Vehicle {
     private String image;//100
     private String status;//20
     
+    
+    private int id;
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }  
+    
+    
     public enum Transmission{
         AUTOMATIC, MANUAL
     }

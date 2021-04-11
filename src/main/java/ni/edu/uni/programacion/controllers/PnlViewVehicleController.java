@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -85,5 +86,14 @@ public class PnlViewVehicleController {
         });
 
         return data;
+    }
+    public List<Vehicle> getVehicles()
+    {
+        return vehicles;
+    }
+    
+    public void update(Observable o, Object o1) {
+       
+       
     }
 }

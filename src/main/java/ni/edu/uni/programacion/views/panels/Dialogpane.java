@@ -8,6 +8,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import ni.edu.uni.programacion.controllers.PnlViewVehicleController;
 
 /**
  *
@@ -547,4 +548,8 @@ public class Dialogpane extends javax.swing.JDialog
     private javax.swing.JTextField txtStock;
     private javax.swing.JTextField txtStyle;
     // End of variables declaration//GEN-END:variables
+
+    void setPnlViewVehicleReference(PnlViewVehicles pnlViewVehicles, PnlViewVehicleController pnlViewVehicleController) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
